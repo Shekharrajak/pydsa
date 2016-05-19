@@ -140,3 +140,64 @@ class BTNode(object):
             self.postorderUtil(root.right)
             self.postlist.append(root.key)
         return self.postlist
+
+    def boundaryTrav(self, root):
+        """
+        Boundary Traversal : print all the boundary nodes of the binary_tree
+        """
+        self.boundaryTrav_list = []
+        return self.boundaryTrav_Util(root)
+
+    def boundaryTrav_Util(self, root):
+        """
+        Print root node, boundary nodes of the left sub-tree, leaf nodes of left and 
+        right sub-tree then boundary nodes of the right sub-tree.
+        """
+        if root:
+            # root
+            self.boundaryTrav_list.append(root.key)
+            # left subtree boundary nodes
+            self.boundaryLeft(root.left)
+            # left subtree leaf nodes
+            self.leavesNode(root.left)
+            # right subtree leaf nodes
+            self.leavesNode(root.right)
+            # right subtree boundary nodes
+            self.boundaryRight(root.right)
+        return self.boundaryTrav_list
+
+    def boundaryLeft(self, root):
+        """
+        Top-down left boundary nodes
+        """
+        if root:
+            if root.left:
+                self.boundaryTrav_list.append(root.key)
+                self.boundaryLeft(root.left)
+            elif root.right:
+                self.boundaryTrav_list.append(root.key)
+                self.boundaryLeft(root.right)
+
+    def boundaryRight(self, root):
+        """
+        Bottom-up right boundary nodes
+        """
+        if root:
+            if root.right:
+                self.boundaryRight(root.right)
+                self.boundaryTrav_list.append(root.key)
+            elif root.left:
+                self.boundaryRight(root.left)
+                self.boundaryTrav_list.append(root.key)
+
+    def leavesNode(self, root):
+        """
+        Leaf nodes
+        """
+        if root:
+            self.leavesNode(root.left)
+
+            if root.left is None and root.right is None:
+                self.boundaryTrav_list.append(root.key)
+
+            self.leavesNode(root.right)

@@ -15,10 +15,12 @@ def test_binary_tree():
     inlist = bt.inorder(bt)
     prelist = bt.preorder(bt)
     postlist = bt.postorder(bt)
+    boundlist = bt.boundaryTrav(bt)
 
     assert inlist == [8, 4, 9, 2, 5, 1, 6, 3, 7]
     assert prelist == [1, 2, 4, 8, 9, 5, 3, 6, 7]
     assert postlist == [8, 9, 4, 5, 2, 6, 7, 3, 1]
+    assert boundlist == [1, 2, 4, 8, 9, 5, 6, 7, 3]
 
     bt.delete(bt.left)
     bt.delete(bt.right)
@@ -26,7 +28,9 @@ def test_binary_tree():
     inlist = bt.inorder(bt)
     prelist = bt.preorder(bt)
     postlist = bt.postorder(bt)
+    boundlist = bt.boundaryTrav(bt)
 
     assert inlist == [8, 4, 9, 5, 1, 6, 7]
     assert prelist == [1, 5, 4, 8, 9, 7, 6]
     assert postlist == [8, 9, 4, 5, 6, 7, 1]
+    assert boundlist == [1, 5, 4, 8, 9, 6, 7]
